@@ -1,19 +1,23 @@
 import React from "react";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
+import Cards from "../components/Cards";
+import Carousel from "../components/Carousel";
 export default function Home() {
   return (
     <>
-    <div><NavBar/></div>
-    <div className="card" style={{"width": "18rem"}}>
-  <img src="..." className="card-img-top" alt="..."/>
-  <div className="card-body">
-    <h5 className="card-title">Card title</h5>
-    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    {/* <a href="#" className="btn btn-primary">Go somewhere</a> */}
-  </div>
-</div>
-    <div><Footer/></div>
+      <div>
+        <NavBar />
+      </div>
+      <div>
+        <Carousel/>
+      </div>
+      <div>
+        <Cards/>
+      </div>
+      <div>
+        <Footer />
+      </div>
     </>
   );
 }
