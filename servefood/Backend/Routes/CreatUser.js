@@ -25,4 +25,27 @@ async (req,res)=>{
     }
 })
 
+router.post('/loginuser',
+body('email',).isEmail(),
+body('password','Invalid Password').isLength({min:5}),
+async (req,res)=>{
+    const err=validationResult(req)
+    if(!err.isEmpty()){
+        return res.status(400).json({err:err.array()})
+    }
+    try{
+        let userData=await user.findOne(req.body.email)
+        if(!userData){
+            return res.status(400).json({err: "Login with correct credential"})
+        }
+        if(req.body.password !== userData.password){
+            return res.status(400).json({err: "Login with correct credential"})
+        }
+        return res.json({success: true})
+    }catch(err){
+        console.log(err)
+        res.json({success: false})
+    }
+})
+
 module.exports = router
