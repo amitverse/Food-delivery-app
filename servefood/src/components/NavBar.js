@@ -32,7 +32,7 @@ export default function NavBar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/creatuser">
+                <Link className="nav-link" to="/createuser">
                   SignUp
                 </Link>
               </li>

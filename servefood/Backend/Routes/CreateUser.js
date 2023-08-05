@@ -26,7 +26,7 @@ async (req,res)=>{
 })
 
 router.post('/loginuser',
-body('email',).isEmail(),
+body('email','Invalid Email').isEmail(),
 body('password','Invalid Password').isLength({min:5}),
 async (req,res)=>{
     const err=validationResult(req)
@@ -34,11 +34,14 @@ async (req,res)=>{
         return res.status(400).json({err:err.array()})
     }
     try{
-        let userData=await user.findOne(req.body.email)
+        let email=req.body.email
+        let userData=await user.findOne({email})
         if(!userData){
+            console.log("Wrong email")
             return res.status(400).json({err: "Login with correct credential"})
         }
         if(req.body.password !== userData.password){
+            console.log("Wrong password")
             return res.status(400).json({err: "Login with correct credential"})
         }
         return res.json({success: true})
