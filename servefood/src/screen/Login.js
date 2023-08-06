@@ -25,6 +25,7 @@ export default function Login() {
       alert("Enter valid Credentials")
     }
     if(jsonerr.success){
+      localStorage.setItem("autjToken",jsonerr.authToken)
       navigate("/")
     }
   }
@@ -68,7 +69,7 @@ export default function Login() {
           <button type="submit" className="m-3 btn btn-success">
             Submit
           </button>
-          <Link to="/creatuser" className="m-3 btn btn-danger">
+          <Link to="/createuser" className="m-3 btn btn-danger">
             New User
           </Link>
         </form>
