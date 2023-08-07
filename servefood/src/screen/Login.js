@@ -25,7 +25,7 @@ export default function Login() {
       alert("Enter valid Credentials")
     }
     if(jsonerr.success){
-      localStorage.setItem("autjToken",jsonerr.authToken)
+      localStorage.setItem("authToken",jsonerr.authToken)
       navigate("/")
     }
   }

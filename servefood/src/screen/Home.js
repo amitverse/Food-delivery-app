@@ -77,10 +77,8 @@ export default function Home() {
                           return (
                             <div key={filterIteam._id} className="col-12 col-md-6 col-lg-3">
                               <Cards
-                                foodName={filterIteam.name}
+                                foodIteam={filterIteam}
                                 options={filterIteam.options[0]}
-                                ImgSrc={filterIteam.img}
-                                description={filterIteam.description}
                               ></Cards>
                             </div>
                           )

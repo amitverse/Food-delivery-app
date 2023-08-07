@@ -1,9 +1,18 @@
 import React from "react";
-import {Link} from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 export default function NavBar() {
+  const navigate = useNavigate()
+  const handlelogout = () => {
+    const text = "Are you sure you want to logout?"
+    let response = window.confirm(text);
+    if (response) {
+      localStorage.removeItem("authToken")
+      navigate("/")
+    }
+  }
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-success " style={{filter: "brightness(120%"}}>
+      <nav className="navbar navbar-expand-lg navbar-dark bg-success " style={{ filter: "brightness(120%" }}>
         <div className="container-fluid">
           <Link className="navbar-brand fs-1 fst-italic" to="/">
             GoFood
@@ -20,23 +29,30 @@ export default function NavBar() {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
+            <ul className="navbar-nav me-auto mb-2">
               <li className="nav-item">
-                <Link className="nav-link active" aria-current="page" to="/">
+                <Link className="nav-link active fs-5" aria-current="page" to="/" >
                   Home
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/login">
-                  Login
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/createuser">
-                  SignUp
-                </Link>
-              </li>
+              {(localStorage.getItem("authToken")) ?
+                <li className="nav-item">
+                  <Link className="nav-link active fs-5" aria-current="page" to="/" >
+                    My Orders
+                  </Link>
+                </li>
+                : ""}
             </ul>
+            {(!localStorage.getItem("authToken")) ?
+              <div className="d-flex">
+                <Link className="btn bg-white text-success mx-1" to="/login">Login</Link>
+                <Link className="btn bg-white text-success mx-1" to="/createuser">SignUp</Link>
+              </div> :
+              <div>
+                <div className="btn bg-white text-success mx-1">My Cart</div>
+                <div className="btn bg-danger text-success mx-1" onClick={handlelogout}>LogOut</div>
+              </div>
+            }
           </div>
         </div>
       </nav>
