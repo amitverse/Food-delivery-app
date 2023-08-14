@@ -10,7 +10,7 @@ const reduser = (state, action) => {
         default:
             console.log("Error in Reduser")
     }
-}
+};
 
 export const CartProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reduser, [])

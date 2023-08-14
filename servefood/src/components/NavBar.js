@@ -1,7 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link, useNavigate } from 'react-router-dom'
+import Badge from 'react-bootstrap/Badge'
+import Modal from "../Modal";
+import Cart from "../screen/Cart";
 export default function NavBar() {
   const navigate = useNavigate()
+  const [CartView, setCartView] = useState(false)
   const handlelogout = () => {
     const text = "Are you sure you want to logout?"
     let response = window.confirm(text);
@@ -49,7 +53,11 @@ export default function NavBar() {
                 <Link className="btn bg-white text-success mx-1" to="/createuser">SignUp</Link>
               </div> :
               <div>
-                <div className="btn bg-white text-success mx-1">My Cart</div>
+                <div className="btn bg-white text-success mx-1" onClick={()=> {setCartView(true)}}>
+                  My Cart {" "}
+                  <Badge pill bg='danger' > 2 </Badge>
+                </div>
+                {CartView? <Modal onClose={()=> {setCartView(false)}}><Cart/></Modal>:null}
                 <div className="btn bg-danger text-success mx-1" onClick={handlelogout}>LogOut</div>
               </div>
             }
