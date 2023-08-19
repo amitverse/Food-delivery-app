@@ -14,6 +14,10 @@ export default function NavBar() {
       navigate("/")
     }
   }
+  const onclick = () => {
+    setCartView(true);
+  }
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-success " style={{ filter: "brightness(120%" }}>
@@ -53,11 +57,11 @@ export default function NavBar() {
                 <Link className="btn bg-white text-success mx-1" to="/createuser">SignUp</Link>
               </div> :
               <div>
-                <div className="btn bg-white text-success mx-1" onClick={()=> {setCartView(true)}}>
+                <div className="btn bg-white text-success mx-1" onClick={onclick}>
                   My Cart {" "}
                   <Badge pill bg='danger' > 2 </Badge>
                 </div>
-                {CartView? <Modal onClose={()=> {setCartView(false)}}><Cart/></Modal>:null}
+                {CartView? <Modal onClose={()=> setCartView(false)}><Cart/></Modal>:null}
                 <div className="btn bg-danger text-success mx-1" onClick={handlelogout}>LogOut</div>
               </div>
             }

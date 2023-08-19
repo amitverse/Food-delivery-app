@@ -6,6 +6,10 @@ export default function Cards(props) {
   const [size, setsize] = useState("")
   let data=useCart()
   const priceRef = useRef()
+  let options = props.options;
+  let option=props.foodIteam;
+  let priceOptions = Object.keys(options);
+  let finalPrice = qnt * parseInt(options[size])
   const handleAddCart = async () => {
     await dispatch({type:"ADD",id: option._id, name: option.name, price: finalPrice, size:size, qnt:qnt})
     console.log(data)
@@ -14,10 +18,6 @@ export default function Cards(props) {
     setsize(priceRef.current.value)
   }, [])
   
-  let options = props.options;
-  let option=props.foodIteam;
-  let priceOptions = Object.keys(options);
-  let finalPrice = qnt * parseInt(options[size])
   return (
     <div>
       <div className="card mt-3" style={{ width: "18rem", maxHeight: "360px" }}>
@@ -52,3 +52,4 @@ export default function Cards(props) {
     </div>
   )
 }
+
